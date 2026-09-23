@@ -1,6 +1,11 @@
+import 'package:elearning/core/network/supabase/supabase_services.dart';
+import 'package:elearning/core/service/service_locator.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  setupServiceLocator();
+  await getIt.get<SupabaseServices>().init();
   runApp(const MyApp());
 }
 
