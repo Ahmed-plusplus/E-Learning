@@ -15,10 +15,11 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_bloc: ^9.1.1
   supabase_flutter: ^2.17.2
-  dotenv: ^4.2.0
   youtube_player_flutter: ^10.0.1
   dartz: ^0.10.1
   get_it: ^9.3.0
+  flutter_dotenv: ^6.0.1
+  flutter_svg: ^2.0.10
 
 dev_dependencies:
   flutter_test:
@@ -30,14 +31,19 @@ flutter:
 
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/icons/
 
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter.ttf
+    - family: NimbusSans
+      fonts:
+        - asset: assets/fonts/NimbusSans.ttf
+    - family: PTSansCaption
+      fonts:
+        - asset: assets/fonts/PTSansCaption.ttf
+    - family: PublicSans
+      fonts:
+        - asset: assets/fonts/PublicSans.ttf

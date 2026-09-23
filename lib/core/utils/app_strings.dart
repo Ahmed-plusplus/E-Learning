@@ -1,0 +1,43 @@
+abstract class AppStrings {
+  static const csAcademy = 'CS Academy';
+  static const splashBody = 'Empowering your learning journey';
+  static const login = 'Login';
+  static const signup = 'Sign up';
+  static const fullName = 'Full Name';
+  static const fullNameHint = 'Enter your full name';
+  static const email = 'Email';
+  static const emailHint = 'Enter your email';
+  static const password = 'Password';
+  static const passwordHint = 'Enter your password';
+  static const forgetPassword = 'Forgot password?';
+  static const continueWith = 'or continue with';
+  static const noAccount = 'Don\'t have an account? ';
+  static const signupWith = 'or sign up with';
+  static const haveAccount = 'Already have an account? Log In';
+  static const logIn = 'Log In';
+  static const welcome = 'welcome to CS Academy';
+  static const searchHint = 'what are you looking for?';
+  static const showDetails = 'Show Details';
+  static const home = 'Home';
+  static const myCourses = 'My Courses';
+  static const profile = 'Profile';
+  static const startCourse = 'Start Course';
+  static const courseDetails = 'Course Details';
+  static const enrolled = 'ENROLLED';
+  static const enrolledSuccessfully = 'Enrolled successfully!';
+  static const completeCourse = 'complete course';
+  static const subscribedCourses = 'Subscribed courses';
+  static const courseVideos = 'Course Videos';
+  static const premiumMember = 'Premium Member';
+  static const accountSettings = 'Account Settings';
+  static const editProfile = 'Edit Profile';
+  static const changePassword = 'Change Password';
+  static const learning = 'Learning';
+  static const myCertificates = 'My Certificates';
+  static const history = 'Purchase History';
+  static const logout = 'Log Out';
+  static const saveChanges = 'Save Changes';
+  static const name = 'Name';
+
+  static String hi(String name) => 'Hi, $name';
+}
