@@ -3,9 +3,10 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseServices {
 
-  final client = Supabase.instance.client;
+  late final SupabaseClient client;
 
   Future<void> init() async{
     await Supabase.initialize(url: SupabaseKeys.url, publishableKey: SupabaseKeys.publicKey);
+    client = Supabase.instance.client;
   }
 }

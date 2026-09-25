@@ -7,6 +7,15 @@ class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
+}
+
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  final AssetGenImage googleIcon = const AssetGenImage(
+    'assets/images/google_icon.png',
+  );
 }
 
 class $AssetsIconsGen {
@@ -26,9 +35,6 @@ class $AssetsIconsGen {
   );
   final SvgGenImage facebookIcon = const SvgGenImage(
     'assets/icons/facebook_icon.svg',
-  );
-  final SvgGenImage googleIcon = const SvgGenImage(
-    'assets/icons/google_icon.svg',
   );
   final SvgGenImage historyIcon = const SvgGenImage(
     'assets/icons/history_icon.svg',

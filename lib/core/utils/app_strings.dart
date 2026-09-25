@@ -13,7 +13,7 @@ abstract class AppStrings {
   static const continueWith = 'or continue with';
   static const noAccount = 'Don\'t have an account? ';
   static const signupWith = 'or sign up with';
-  static const haveAccount = 'Already have an account? Log In';
+  static const haveAccount = 'Already have an account? ';
   static const logIn = 'Log In';
   static const welcome = 'welcome to CS Academy';
   static const searchHint = 'what are you looking for?';
