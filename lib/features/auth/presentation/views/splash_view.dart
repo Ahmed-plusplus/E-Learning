@@ -44,7 +44,7 @@ class _SplashViewState extends State<SplashView> {
               height: imgSize,
               decoration: BoxDecoration(
                 border: Border.all(color: AppColors.splashIconBorder, width: 2),
-                borderRadius: BorderRadius.circular(AppDimensions.splashIconRadius),
+                borderRadius: BorderRadius.circular(AppDimensions.radius),
                 color: AppColors.splashIconContainer,
               ),
               child: Padding(

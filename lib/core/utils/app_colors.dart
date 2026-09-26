@@ -10,6 +10,7 @@ abstract class AppColors {
   static const csAcademyTitle = Color(0xFFFFD656);
   static const textFieldTitle = Color(0xFF334155);
   static const eye = Color(0xFF94A3B8);
+  static const cardBorder = Color(0xFFF3F4F6);
   static const textFieldBorder = Color(0xFFE2E8F0);
   static const textFieldBackground = Color(0xFFF8FAFC);
   static const textFieldHint = Color(0xFF6B7280);

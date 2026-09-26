@@ -34,7 +34,7 @@ class SignupStates {
     fullName: fullName ?? this.fullName,
     email: email ?? this.email,
     password: password ?? this.password,
-    errorMessage: errorMessage ?? this.errorMessage
+    errorMessage: errorMessage
   );
 }
 

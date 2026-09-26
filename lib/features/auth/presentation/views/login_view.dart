@@ -43,7 +43,7 @@ class _LoginViewState extends State<LoginView> {
                   || state.status == LoginStatus.failedLogin,
                 listener: (context, state){
                   if(state.status == LoginStatus.successLogin){
-                    context.go(AppRoutes.home);
+                    context.go(AppRoutes.base);
                   } else if(state.status == LoginStatus.failedLogin){
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(

@@ -43,7 +43,7 @@ class _SignupViewState extends State<SignupView> {
                       || state.status == SignupStatus.failedSignup,
                   listener: (context, state){
                     if(state.status == SignupStatus.successSignup){
-                      context.go(AppRoutes.home);
+                      context.go(AppRoutes.base);
                     } else if(state.status == SignupStatus.failedSignup){
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

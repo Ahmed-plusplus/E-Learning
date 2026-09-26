@@ -6,6 +6,9 @@ import 'package:elearning/features/auth/presentation/view_models/cubit/signup/si
 import 'package:elearning/features/auth/presentation/views/login_view.dart';
 import 'package:elearning/features/auth/presentation/views/signup_view.dart';
 import 'package:elearning/features/auth/presentation/views/splash_view.dart';
+import 'package:elearning/features/base/data/repository/base_repository.dart';
+import 'package:elearning/features/base/presentation/view_models/cubit/base_cubit.dart';
+import 'package:elearning/features/base/presentation/views/base_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,8 +33,11 @@ final appRouter = GoRouter(
       )
     ),
     GoRoute(
-      path: AppRoutes.home,
-      builder: (context, state) => SplashView()
+      path: AppRoutes.base,
+      builder: (context, state) => BlocProvider(
+        create: (context) => BaseCubit(getIt<BaseRepository>())..init(),
+        child: BaseView(),
+      )
     ),
   ]
 );

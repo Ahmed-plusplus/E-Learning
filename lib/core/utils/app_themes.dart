@@ -45,7 +45,7 @@ abstract class AppThemes {
         fontSize: 16,
       ),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.textFieldRadius),
+        borderRadius: BorderRadius.circular(AppDimensions.radius),
         borderSide: const BorderSide(
           color: AppColors.textFieldBorder,
         ),
@@ -54,13 +54,13 @@ abstract class AppThemes {
         color: AppColors.textFieldBorder,
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.textFieldRadius),
+        borderRadius: BorderRadius.circular(AppDimensions.radius),
         borderSide: const BorderSide(
           color: AppColors.textFieldBorder,
         ),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(AppDimensions.textFieldRadius),
+        borderRadius: BorderRadius.circular(AppDimensions.radius),
         borderSide: const BorderSide(
           color: AppColors.textFieldBorder,
         ),
@@ -82,6 +82,12 @@ abstract class AppThemes {
         fontWeight: FontWeight.w600,
         color: AppColors.white
       ),
+      titleLarge: TextStyle(
+          fontSize: 20,
+          fontFamily: AppFonts.nimbusSans,
+          fontWeight: FontWeight.w700,
+          color: AppColors.white
+      ),
       titleMedium: TextStyle(
         fontWeight: FontWeight.w700,
         color: AppColors.black,
@@ -94,9 +100,13 @@ abstract class AppThemes {
         fontWeight: FontWeight.w600,
         color: AppColors.textFieldTitle,
       ),
+      labelMedium: TextStyle(
+        fontWeight: FontWeight.w600,
+        color: AppColors.cardBody
+      )
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColors.primary,
+      backgroundColor: Colors.transparent,
       selectedItemColor: AppColors.white,
       unselectedItemColor: AppColors.bottomBarNotSelectedItem,
       type: BottomNavigationBarType.fixed,

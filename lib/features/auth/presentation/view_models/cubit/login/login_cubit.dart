@@ -23,7 +23,10 @@ class LoginCubit extends Cubit<LoginStates> {
       final response = await _repository.login(LoginRequest(email: state.email, password: state.password));
       response.fold(
         (failure) => emit(state.copyWith(LoginStatus.failedLogin, errorMessage: failure.errorMessage)),
-          (user) => emit(state.copyWith(LoginStatus.successLogin, ))
+        (user) async {
+          await _repository.saveUserName(user.name ?? '');
+          emit(state.copyWith(LoginStatus.successLogin, ));
+        }
       );
   }
 }

@@ -40,4 +40,5 @@ abstract class AppStrings {
   static const name = 'Name';
 
   static String hi(String name) => 'Hi, $name';
+  static String egp(int price) => '$price EGP';
 }
