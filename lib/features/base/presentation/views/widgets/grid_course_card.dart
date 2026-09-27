@@ -9,6 +9,7 @@ import 'package:elearning/features/base/data/model/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 
 class GridCourseCard extends StatelessWidget {
   const GridCourseCard({super.key, required this._course});
@@ -34,17 +35,23 @@ class GridCourseCard extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: 153 / 86,
-              child: Container(
-                height: 85 * heightRatio,
-                decoration: BoxDecoration(
-                  color: AppColors.black,
-                  borderRadius: BorderRadius.circular(AppDimensions.imageRadius),
-                ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(AppDimensions.imageRadius),
                 child: (_course.imageUrl == null)
-                    ? null
-                    : (_course.imageUrl!.contains('.svg'))
-                      ? SvgPicture.network(_course.imageUrl!)
-                      : CachedNetworkImage(imageUrl: _course.imageUrl!),
+                ? Shimmer.fromColors(
+                    baseColor: Colors.grey.shade300,
+                    highlightColor: Colors.grey.shade100,
+                    child: Container(
+                      height: 85 * heightRatio,
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        borderRadius: BorderRadius.circular(AppDimensions.imageRadius),
+                      ),
+                    ),
+                )
+                : (_course.imageUrl!.contains('.svg'))
+                    ? SvgPicture.network(_course.imageUrl!)
+                    : CachedNetworkImage(imageUrl: _course.imageUrl!),
               ),
             ),
             SizedBox(height: 12 * heightRatio),

@@ -1,3 +1,4 @@
+import 'package:elearning/core/utils/app_strings.dart';
 import 'package:elearning/features/course/data/model/lesson_model.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,9 @@ class _LessonVideoViewState extends State<LessonVideoView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.lesson.name ?? AppStrings.videoTitle),
+      ),
       body: Center(
         child: Builder(
           builder: (context) {

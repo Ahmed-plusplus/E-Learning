@@ -9,6 +9,7 @@ import 'package:elearning/features/base/data/model/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ListCourseCard extends StatelessWidget {
   const ListCourseCard({super.key, required this._course});
@@ -32,16 +33,22 @@ class ListCourseCard extends StatelessWidget {
             Expanded(
               child: AspectRatio(
                 aspectRatio: 128 / 80,
-                child: Container(
-                  height: 80 * 130 / AppDimensions.figmaHeight,
-                  width: 128 * 358 / AppDimensions.figmaWidth,
-                  decoration: BoxDecoration(
-                    color: AppColors.black,
-                    borderRadius: BorderRadius.circular(AppDimensions.imageRadius),
-                  ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(AppDimensions.imageRadius),
                   child: (_course.imageUrl == null)
-                      ? null
-                      : (_course.imageUrl!.contains('.svg'))
+                    ? Shimmer.fromColors(
+                        baseColor: Colors.grey.shade300,
+                        highlightColor: Colors.grey.shade100,
+                        child: Container(
+                        height: 80 * 130 / AppDimensions.figmaHeight,
+                        width: 128 * 358 / AppDimensions.figmaWidth,
+                        decoration: BoxDecoration(
+                          color: AppColors.white,
+                          borderRadius: BorderRadius.circular(AppDimensions.imageRadius),
+                        ),
+                      ),
+                    )
+                    : (_course.imageUrl!.contains('.svg'))
                       ? SvgPicture.network(_course.imageUrl!)
                       : CachedNetworkImage(imageUrl: _course.imageUrl!),
                 ),

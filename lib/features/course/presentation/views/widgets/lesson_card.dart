@@ -8,6 +8,7 @@ import 'package:elearning/features/course/data/model/lesson_model.dart';
 import 'package:elearning/generated/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shimmer/shimmer.dart';
 
 class LessonCard extends StatelessWidget {
   const LessonCard({super.key, required this._lesson, this.thumbnail});
@@ -29,20 +30,29 @@ class LessonCard extends StatelessWidget {
         padding: EdgeInsetsGeometry.all(12),
         child: Row(
           children: [
-            Expanded(
-              child: Container(
-                height: 64,
-                width: 64,
-                decoration: BoxDecoration(
-                  color: AppColors.black,
-                  borderRadius: BorderRadius.circular(AppDimensions.imageRadius),
-                ),
-                child: (thumbnail == null) ? null : Image.file(File(thumbnail!)),
-              ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(AppDimensions.imageRadius),
+              child: (thumbnail == null)
+                  ? Shimmer.fromColors(
+                      baseColor: Colors.grey.shade300,
+                      highlightColor: Colors.grey.shade100,
+                      child: Container(
+                        height: 64,
+                        width: 64,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(
+                            AppDimensions.imageRadius,
+                          ),
+                        ),
+                      ),
+                    )
+                  : Image.file(File(thumbnail!), height: 64, width: 64, fit: BoxFit.cover,),
             ),
-            SizedBox(width: 24,),
+            SizedBox(width: 16,),
             Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     _lesson.name ?? '',
@@ -59,6 +69,7 @@ class LessonCard extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(width: 16,),
             GestureDetector(
               onTap: () => context.push(AppRoutes.lessonVideo, extra: _lesson.toMap()),
               child: CircleAvatar(

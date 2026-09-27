@@ -28,6 +28,7 @@ abstract class AppStrings {
   static const completeCourse = 'complete course';
   static const subscribedCourses = 'Subscribed courses';
   static const courseVideos = 'Course Videos';
+  static const videoTitle = 'video title';
   static const premiumMember = 'Premium Member';
   static const accountSettings = 'Account Settings';
   static const editProfile = 'Edit Profile';

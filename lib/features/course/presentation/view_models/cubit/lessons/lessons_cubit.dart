@@ -19,7 +19,8 @@ class LessonsCubit extends Cubit<LessonsStates> {
                 ? null
                 : await VideoThumbnail.thumbnailFile(
                   video: state.lessons[index].videoUrl!,
-                  imageFormat: ImageFormat.WEBP
+                  imageFormat: ImageFormat.WEBP,
+                  timeMs: 1000
                 ),
           )
       );

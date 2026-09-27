@@ -32,110 +32,112 @@ class _LoginViewState extends State<LoginView> {
     final size = MediaQuery.of(context).size;
     final widthRatio = size.width / AppDimensions.figmaWidth;
     final heightRatio = size.height / AppDimensions.figmaHeight;
-    return Scaffold(
-      body: Column(
-        children: [
-          const MainHeaderWidget(pageName: AppStrings.login,),
-          Expanded(
-            child: SingleChildScrollView(
-              child: BlocConsumer<LoginCubit, LoginStates>(
-                listenWhen: (context, state) => state.status == LoginStatus.successLogin
-                  || state.status == LoginStatus.failedLogin,
-                listener: (context, state){
-                  if(state.status == LoginStatus.successLogin){
-                    context.go(AppRoutes.base);
-                  } else if(state.status == LoginStatus.failedLogin){
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(state.errorMessage!),
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+            const MainHeaderWidget(pageName: AppStrings.login,),
+            Expanded(
+              child: SingleChildScrollView(
+                child: BlocConsumer<LoginCubit, LoginStates>(
+                  listenWhen: (context, state) => state.status == LoginStatus.successLogin
+                    || state.status == LoginStatus.failedLogin,
+                  listener: (context, state){
+                    if(state.status == LoginStatus.successLogin){
+                      context.go(AppRoutes.base);
+                    } else if(state.status == LoginStatus.failedLogin){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(state.errorMessage!),
+                        ),
+                      );
+                    }
+                  },
+                  buildWhen: (context, state) => state.status == LoginStatus.initial
+                    || state.status == LoginStatus.loadingLogin
+                    || state.status == LoginStatus.failedLogin,
+                  builder: (context, state) {
+                    _cubit = context.read<LoginCubit>();
+                    return Padding(
+                      padding: EdgeInsetsGeometry.symmetric(horizontal: 30 * widthRatio, vertical: 40 * heightRatio),
+                      child: Column(
+                        children: [
+                          LoginForm(formKey: _formKey, cubit: _cubit),
+                          SizedBox(height: 20 * heightRatio,),
+                          Align(
+                            alignment: AlignmentGeometry.centerEnd,
+                            child: Text(
+                              AppStrings.forgetPassword,
+                              style: theme.textTheme.titleSmall?.copyWith(
+                                color: AppColors.text1, fontFamily: AppFonts.nimbusSans,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 34 * heightRatio,),
+                          CustomElevatedButton(
+                            onPressed: () {
+                              if(_formKey.currentState!.validate()) {
+                                _cubit.login();
+                              }
+                            },
+                            text: AppStrings.login,
+                            isEnabled: state.status != LoginStatus.loadingLogin,
+                          ),
+                          SizedBox(height: 20 * heightRatio,),
+                          Row(
+                            children: [
+                              Expanded(child: Container(height: 1, color: AppColors.divider,)),
+                              Padding(
+                                padding: EdgeInsetsGeometry.symmetric(horizontal: 16 * widthRatio),
+                                child: Text(
+                                  AppStrings.continueWith,
+                                  style: theme.textTheme.titleMedium?.copyWith(fontFamily: AppFonts.nimbusSans),
+                                ),
+                              ),
+                              Expanded(child: Container(height: 1, color: AppColors.divider,)),
+                            ],
+                          ),
+                          SizedBox(height: 32 * heightRatio,),
+                          Row(
+                            children: [
+                              Spacer(),
+                              Assets.images.googleIcon.image(),
+                              Spacer(),
+                              Assets.icons.facebookIcon.svg(),
+                              Spacer(),
+                              Assets.icons.appleIcon.svg(),
+                              Spacer(),
+                            ],
+                          ),
+                          SizedBox(height: 90 * heightRatio,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                AppStrings.noAccount,
+                                style: theme.textTheme.bodyMedium?.copyWith(color: AppColors.text2),
+                              ),
+                              GestureDetector(
+                                onTap: () => context.go(AppRoutes.signup),
+                                child: Text(
+                                  AppStrings.signup,
+                                  style: theme.textTheme.titleSmall?.copyWith(
+                                    color: AppColors.primary,
+                                    fontWeight: FontWeight.w700
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     );
                   }
-                },
-                buildWhen: (context, state) => state.status == LoginStatus.initial
-                  || state.status == LoginStatus.loadingLogin
-                  || state.status == LoginStatus.failedLogin,
-                builder: (context, state) {
-                  _cubit = context.read<LoginCubit>();
-                  return Padding(
-                    padding: EdgeInsetsGeometry.symmetric(horizontal: 30 * widthRatio, vertical: 40 * heightRatio),
-                    child: Column(
-                      children: [
-                        LoginForm(formKey: _formKey, cubit: _cubit),
-                        SizedBox(height: 20 * heightRatio,),
-                        Align(
-                          alignment: AlignmentGeometry.centerEnd,
-                          child: Text(
-                            AppStrings.forgetPassword,
-                            style: theme.textTheme.titleSmall?.copyWith(
-                              color: AppColors.text1, fontFamily: AppFonts.nimbusSans,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 34 * heightRatio,),
-                        CustomElevatedButton(
-                          onPressed: () {
-                            if(_formKey.currentState!.validate()) {
-                              _cubit.login();
-                            }
-                          },
-                          text: AppStrings.login,
-                          isEnabled: state.status != LoginStatus.loadingLogin,
-                        ),
-                        SizedBox(height: 20 * heightRatio,),
-                        Row(
-                          children: [
-                            Expanded(child: Container(height: 1, color: AppColors.divider,)),
-                            Padding(
-                              padding: EdgeInsetsGeometry.symmetric(horizontal: 16 * widthRatio),
-                              child: Text(
-                                AppStrings.continueWith,
-                                style: theme.textTheme.titleMedium?.copyWith(fontFamily: AppFonts.nimbusSans),
-                              ),
-                            ),
-                            Expanded(child: Container(height: 1, color: AppColors.divider,)),
-                          ],
-                        ),
-                        SizedBox(height: 32 * heightRatio,),
-                        Row(
-                          children: [
-                            Spacer(),
-                            Assets.images.googleIcon.image(),
-                            Spacer(),
-                            Assets.icons.facebookIcon.svg(),
-                            Spacer(),
-                            Assets.icons.appleIcon.svg(),
-                            Spacer(),
-                          ],
-                        ),
-                        SizedBox(height: 90 * heightRatio,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              AppStrings.noAccount,
-                              style: theme.textTheme.bodyMedium?.copyWith(color: AppColors.text2),
-                            ),
-                            GestureDetector(
-                              onTap: () => context.go(AppRoutes.signup),
-                              child: Text(
-                                AppStrings.signup,
-                                style: theme.textTheme.titleSmall?.copyWith(
-                                  color: AppColors.primary,
-                                  fontWeight: FontWeight.w700
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                }
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

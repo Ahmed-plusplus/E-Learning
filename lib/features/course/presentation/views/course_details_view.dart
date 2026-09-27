@@ -10,8 +10,10 @@ class CourseDetailsView extends StatefulWidget {
 class _CourseDetailsViewState extends State<CourseDetailsView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return SafeArea(
+      child: Scaffold(
 
+      ),
     );
   }
 }

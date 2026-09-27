@@ -27,45 +27,47 @@ class _BaseViewState extends State<BaseView> {
     return ValueListenableBuilder(
       valueListenable: bottomNavBarIndex,
       builder: (context, value, child) {
-        return Scaffold(
-          body: BlocConsumer<BaseCubit, BaseStates>(
-            listenWhen: (context, state) => state.status == BaseStatus.failedFetchingAllCourses
-              || state.status == BaseStatus.failedFetchingMyCourses,
-            listener: (context, state){
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.errorMessage!))
-              );
-            },
-            builder: (context, state) {
-              _cubit = context.read<BaseCubit>();
-              return IndexedStack(
-                index: value,
-                children: [
-                  HomeView(cubit: _cubit),
-                  MyCourseView(cubit: _cubit),
-                  ProfileView(),
-                ],
-              );
-            }
-          ),
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: AppColors.primary,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(AppDimensions.bottomNavBarRadius),
-                topRight: Radius.circular(AppDimensions.bottomNavBarRadius),
-              ),
+        return SafeArea(
+          child: Scaffold(
+            body: BlocConsumer<BaseCubit, BaseStates>(
+              listenWhen: (context, state) => state.status == BaseStatus.failedFetchingAllCourses
+                || state.status == BaseStatus.failedFetchingMyCourses,
+              listener: (context, state){
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.errorMessage!))
+                );
+              },
+              builder: (context, state) {
+                _cubit = context.read<BaseCubit>();
+                return IndexedStack(
+                  index: value,
+                  children: [
+                    HomeView(cubit: _cubit),
+                    MyCourseView(cubit: _cubit),
+                    ProfileView(),
+                  ],
+                );
+              }
             ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-              child: BottomNavigationBar(
-                items: [
-                  BottomNavigationBarItem(icon: Assets.icons.homeIcon.svg(), label: AppStrings.home),
-                  BottomNavigationBarItem(icon: Assets.icons.myCoursesIcon.svg(), label: AppStrings.myCourses),
-                  BottomNavigationBarItem(icon: Assets.icons.profileIcon.svg(), label: AppStrings.profile),
-                ],
-                currentIndex: value,
-                onTap: (index) => bottomNavBarIndex.value = index,
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(AppDimensions.bottomNavBarRadius),
+                  topRight: Radius.circular(AppDimensions.bottomNavBarRadius),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+                child: BottomNavigationBar(
+                  items: [
+                    BottomNavigationBarItem(icon: Assets.icons.homeIcon.svg(), label: AppStrings.home),
+                    BottomNavigationBarItem(icon: Assets.icons.myCoursesIcon.svg(), label: AppStrings.myCourses),
+                    BottomNavigationBarItem(icon: Assets.icons.profileIcon.svg(), label: AppStrings.profile),
+                  ],
+                  currentIndex: value,
+                  onTap: (index) => bottomNavBarIndex.value = index,
+                ),
               ),
             ),
           ),

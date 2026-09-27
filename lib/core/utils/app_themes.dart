@@ -35,6 +35,17 @@ abstract class AppThemes {
         )
       ),
     ),
+    appBarTheme: AppBarThemeData(
+      backgroundColor: AppColors.primary,
+      foregroundColor: AppColors.white,
+      titleTextStyle: TextStyle(
+        color: AppColors.white,
+        fontSize: 18,
+      ),
+    ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: AppColors.primary
+    ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
       fillColor: AppColors.textFieldBackground,
