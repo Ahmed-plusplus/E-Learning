@@ -63,10 +63,10 @@ class GridCourseCard extends StatelessWidget {
                 fontFamily: AppFonts.nimbusSans,
               ),
             ),
-            SizedBox(height: 12,),
+            Spacer(),
             CustomElevatedButton(
               text: AppStrings.showDetails,
-              onPressed: () => context.go(AppRoutes.splash),
+              onPressed: () => context.go(AppRoutes.courseDetails),
             )
           ],
         ),

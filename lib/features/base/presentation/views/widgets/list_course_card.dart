@@ -64,7 +64,10 @@ class ListCourseCard extends StatelessWidget {
                   SizedBox(height: 12,),
                   CustomElevatedButton(
                     text: AppStrings.completeCourse,
-                    onPressed: () => context.go(AppRoutes.splash),
+                    onPressed: () => context.go(
+                      AppRoutes.lessons,
+                      extra: _course.lessons?.map((lesson) => lesson.toMap()).toList() ?? [],
+                    ),
                   ),
                 ],
               ),
