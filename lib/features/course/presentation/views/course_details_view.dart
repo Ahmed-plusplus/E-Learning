@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:elearning/core/route/app_routes.dart';
 import 'package:elearning/core/shared/widgets/custom_elevated_button.dart';
 import 'package:elearning/core/utils/app_colors.dart';
 import 'package:elearning/core/utils/app_dimensions.dart';
@@ -10,6 +11,7 @@ import 'package:elearning/features/course/presentation/view_models/cubit/course_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CourseDetailsView extends StatefulWidget {
@@ -101,7 +103,9 @@ class _CourseDetailsViewState extends State<CourseDetailsView> {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                   child: CustomElevatedButton(
                     text: AppStrings.startCourse,
-                    onPressed: () => null,
+                    onPressed: () => context.push(AppRoutes.lessons,
+                        extra: _cubit.state.course.lessons?.map((lesson) => lesson.toMap()).toList() ?? []
+                    ),
                   ),
                 ),
               ],
