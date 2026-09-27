@@ -74,7 +74,7 @@ class GridCourseCard extends StatelessWidget {
             ),
             Spacer(),
             CustomElevatedButton(
-              onPressed: () => context.push(AppRoutes.courseDetails),
+              onPressed: () => context.push(AppRoutes.courseDetails, extra: _course.toMap()),
               fontSize: 14,
               fontWeight: FontWeight.w500,
               text: (AppStrings.showDetails),

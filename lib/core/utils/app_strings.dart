@@ -23,6 +23,7 @@ abstract class AppStrings {
   static const profile = 'Profile';
   static const startCourse = 'Start Course';
   static const courseDetails = 'Course Details';
+  static const description = 'Description';
   static const enrolled = 'ENROLLED';
   static const enrolledSuccessfully = 'Enrolled successfully!';
   static const completeCourse = 'complete course';

@@ -109,6 +109,10 @@ abstract class AppThemes {
         fontSize: 18,
         color: AppColors.white,
       ),
+      bodyMedium: TextStyle(
+        fontSize: 16,
+        color: AppColors.descriptionDetails,
+      ),
       labelLarge: TextStyle(
         fontWeight: FontWeight.w600,
         color: AppColors.textFieldTitle,
