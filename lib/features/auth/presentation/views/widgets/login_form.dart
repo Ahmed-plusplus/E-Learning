@@ -4,19 +4,29 @@ import 'package:elearning/features/auth/presentation/view_models/cubit/login/log
 import 'package:elearning/generated/assets.dart';
 import 'package:flutter/material.dart';
 
-class LoginForm extends StatelessWidget {
-  LoginForm({super.key, required this._cubit, required this._formKey});
+class LoginForm extends StatefulWidget {
+  const LoginForm({super.key, required this.cubit, required this.formKey});
 
-  final LoginCubit _cubit;
-  final GlobalKey _formKey;
+  final LoginCubit cubit;
+  final GlobalKey formKey;
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
   final TextEditingController emailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
+
   final GlobalKey<FormFieldState> emailKey = GlobalKey();
+
   final GlobalKey<FormFieldState> passwordKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: _formKey,
+      key: widget.formKey,
       child: Column(
         children: [
           CustomTextField(
@@ -25,7 +35,7 @@ class LoginForm extends StatelessWidget {
             controller: emailController,
             hint: AppStrings.emailHint,
             icon: Assets.icons.loginEmailIcon,
-            onChanged: (email) => _cubit.changeEmail(email),
+            onChanged: (email) => widget.cubit.changeEmail(email),
             validator: (email){
               if(email?.isEmpty ?? true){
                 return 'Please fill your email!';
@@ -41,7 +51,7 @@ class LoginForm extends StatelessWidget {
             hint: AppStrings.passwordHint,
             icon: Assets.icons.loginPasswordIcon,
             isPassword: true,
-            onChanged: (password) => _cubit.changePassword(password),
+            onChanged: (password) => widget.cubit.changePassword(password),
             validator: (password){
               if(password?.isEmpty ?? true){
                 return 'Please fill a strong password!';

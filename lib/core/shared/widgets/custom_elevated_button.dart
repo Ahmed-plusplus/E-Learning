@@ -7,19 +7,29 @@ class CustomElevatedButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
-    this.isEnabled = true
+    this.isEnabled = true,
+    this.fontFamily = AppFonts.nimbusSans,
+    this.fontSize = 18,
+    this.fontWeight = FontWeight.w700
   });
 
   final String text;
   final VoidCallback onPressed;
   final bool isEnabled;
+  final String fontFamily;
+  final double fontSize;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
       style: Theme.of(context).textButtonTheme.style?.copyWith(
-          textStyle: WidgetStatePropertyAll(TextStyle(fontFamily: AppFonts.nimbusSans))
+          textStyle: WidgetStatePropertyAll(TextStyle(
+            fontFamily: fontFamily,
+            fontSize: fontSize,
+            fontWeight: fontWeight
+          )),
       ),
       child: isEnabled
           ? Text(text)

@@ -13,7 +13,9 @@ abstract class AppThemes {
         backgroundColor: AppColors.buttonBackground,
         foregroundColor: AppColors.white,
         elevation: 0,
-        minimumSize: const Size(double.infinity, 50),
+        minimumSize: const Size(double.infinity, 36),
+        maximumSize: const Size(double.infinity, 50),
+        padding: EdgeInsetsGeometry.all(8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),

@@ -60,7 +60,7 @@ class LessonCard extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () => context.go(AppRoutes.lessonVideo, extra: _lesson.toMap()),
+              onTap: () => context.push(AppRoutes.lessonVideo, extra: _lesson.toMap()),
               child: CircleAvatar(
                 backgroundColor: AppColors.primary,
                 child: Assets.icons.playIcon.svg(),

@@ -1,4 +1,5 @@
 import 'package:elearning/features/course/data/model/lesson_model.dart';
+import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -13,6 +14,7 @@ class LessonVideoView extends StatefulWidget {
 
 class _LessonVideoViewState extends State<LessonVideoView> {
   VideoPlayerController? _controller;
+  late FlickManager _flickManager;
 
   @override
   void initState() {
@@ -26,12 +28,15 @@ class _LessonVideoViewState extends State<LessonVideoView> {
           setState(() {});
         }
       });
+      _flickManager = FlickManager(videoPlayerController: _controller!);
+
     }
   }
 
   @override
   void dispose() {
     _controller?.dispose();
+    _flickManager.dispose();
     super.dispose();
   }
 
@@ -41,35 +46,17 @@ class _LessonVideoViewState extends State<LessonVideoView> {
       body: Center(
         child: Builder(
           builder: (context) {
-            if (!(_controller?.value.isInitialized ?? false)) {
+            final flickController = _flickManager.flickVideoManager?.videoPlayerController;
+            if(flickController?.value.hasError ?? false){
+              Text(flickController!.value.errorDescription ?? 'There is something error');
+            }
+            if (flickController == null || !(flickController.value.isInitialized)) {
               return CircularProgressIndicator();
             }
             return AspectRatio(
-              aspectRatio: _controller!.value.aspectRatio,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  VideoPlayer(_controller!),
-
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        if (_controller!.value.isPlaying) {
-                          _controller!.pause();
-                        } else {
-                          _controller!.play();
-                        }
-                      });
-                    },
-                    icon: Icon(
-                      _controller!.value.isPlaying
-                          ? Icons.pause
-                          : Icons.play_arrow,
-                      size: 50,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
+              aspectRatio: flickController.value.aspectRatio,
+              child: FlickVideoPlayer(
+                flickManager: _flickManager,
               ),
             );
           }

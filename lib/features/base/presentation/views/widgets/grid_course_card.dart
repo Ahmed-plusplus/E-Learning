@@ -18,13 +18,15 @@ class GridCourseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final size = MediaQuery.of(context).size;
+    final heightRatio = size.height / AppDimensions.figmaHeight;
     return Card.filled(
       shape: RoundedRectangleBorder(
         side: BorderSide(color: AppColors.cardBorder),
         borderRadius: BorderRadius.circular(AppDimensions.radius),
       ),
       color: AppColors.white,
-      margin: EdgeInsetsGeometry.all(8),
+      // margin: EdgeInsetsGeometry.all(8),
       child: Padding(
         padding: EdgeInsetsGeometry.all(8),
         child: Column(
@@ -33,7 +35,7 @@ class GridCourseCard extends StatelessWidget {
             AspectRatio(
               aspectRatio: 153 / 86,
               child: Container(
-                height: 86 * 204 / AppDimensions.figmaHeight,
+                height: 85 * heightRatio,
                 decoration: BoxDecoration(
                   color: AppColors.black,
                   borderRadius: BorderRadius.circular(AppDimensions.imageRadius),
@@ -45,7 +47,7 @@ class GridCourseCard extends StatelessWidget {
                       : CachedNetworkImage(imageUrl: _course.imageUrl!),
               ),
             ),
-            SizedBox(height: 12),
+            SizedBox(height: 12 * heightRatio),
             Text(
               _course.name ?? '',
               maxLines: 1,
@@ -56,7 +58,7 @@ class GridCourseCard extends StatelessWidget {
                 color: AppColors.cardTitle,
               ),
             ),
-            SizedBox(height: 4,),
+            SizedBox(height: 4 * heightRatio,),
             Text(
               AppStrings.egp(_course.price ?? 0),
               style: theme.textTheme.labelMedium?.copyWith(
@@ -65,8 +67,10 @@ class GridCourseCard extends StatelessWidget {
             ),
             Spacer(),
             CustomElevatedButton(
-              text: AppStrings.showDetails,
-              onPressed: () => context.go(AppRoutes.courseDetails),
+              onPressed: () => context.push(AppRoutes.courseDetails),
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+              text: (AppStrings.showDetails),
             )
           ],
         ),
