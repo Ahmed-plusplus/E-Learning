@@ -4,6 +4,13 @@ abstract class SupabaseKeys {
   static final url = dotenv.get('SB_URL');
   static final publicKey = dotenv.get('SB_PUBLISH_KEY');
 
+  static const authHeader = 'Authentication';
+  static String bearerAuth(String token) => 'Bearer $token';
+
+  static const courseSubscriptionTable = 'course_subscription';
+  static const userIdColumn = 'user_id';
+  static const courseIdColumn = 'course_id';
+
   static const success = 'success';
   static const data = 'data';
   static const message = 'message';

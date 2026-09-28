@@ -33,6 +33,9 @@ class _CourseDetailsViewState extends State<CourseDetailsView> {
       child: Scaffold(
         appBar: AppBar(title: Text(AppStrings.courseDetails),),
         body: BlocConsumer<CourseDetailsCubit, CourseDetailsStates>(
+          listenWhen: (context, state) => state.status == CourseDetailsStatus.failedCheckEnrollment
+            || state.status == CourseDetailsStatus.failedEnrollCourse
+            || state.status == CourseDetailsStatus.loadedEnrollCourse,
           listener: (context, state){
 
           },
@@ -102,12 +105,37 @@ class _CourseDetailsViewState extends State<CourseDetailsView> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                   child: CustomElevatedButton(
-                    text: AppStrings.startCourse,
-                    onPressed: () => context.push(AppRoutes.lessons,
-                        extra: _cubit.state.course.lessons?.map((lesson) => lesson.toMap()).toList() ?? []
-                    ),
+                    text: state.isEnrolled ? AppStrings.enrolled : AppStrings.startCourse,
+                    onPressed: () => state.isEnrolled ? context.push(AppRoutes.lessons,
+                        extra: state.course.lessons?.map((lesson) => lesson.toMap()).toList() ?? []
+                    ) : _cubit.enrollCourse(),
+                    isEnabled: state.status != CourseDetailsStatus.loadingCheckEnrollment
+                    && state.status != CourseDetailsStatus.loadingEnrollCourse,
                   ),
                 ),
+                if(state.status == CourseDetailsStatus.loadedEnrollCourse)
+                  Container(
+                    color: state.isEnrolled ? AppColors.priceDetails : AppColors.logoutColor,
+                    height: 48 * heightRatio,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          state.isEnrolled ? Icons.check_circle_outline : Icons.cancel_outlined,
+                          color: AppColors.white,
+                          size: 14,
+                        ),
+                        SizedBox(width: 8,),
+                        Text(
+                          state.isEnrolled ? AppStrings.enrolledSuccessfully : AppStrings.enrolledFailed,
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
               ],
             );
           }

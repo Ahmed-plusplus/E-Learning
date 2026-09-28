@@ -11,6 +11,7 @@ import 'package:elearning/features/base/presentation/view_models/cubit/base_cubi
 import 'package:elearning/features/base/presentation/views/base_view.dart';
 import 'package:elearning/features/course/data/model/course_model.dart';
 import 'package:elearning/features/course/data/model/lesson_model.dart';
+import 'package:elearning/features/course/data/repository/course_repository.dart';
 import 'package:elearning/features/course/presentation/view_models/cubit/course_details/course_details_cubit.dart';
 import 'package:elearning/features/course/presentation/view_models/cubit/lessons/lessons_cubit.dart';
 import 'package:elearning/features/course/presentation/views/course_details_view.dart';
@@ -49,7 +50,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: AppRoutes.courseDetails,
       builder: (context, state) => BlocProvider(
-        create: (context) => CourseDetailsCubit(CourseModel.fromJson(state.extra as Map<String, dynamic>)),
+        create: (context) => CourseDetailsCubit(
+          repository: getIt<CourseRepository>(),
+          course: CourseModel.fromJson(state.extra as Map<String, dynamic>),
+        )..checkEnrollment(),
         child: CourseDetailsView(),
       )
     ),

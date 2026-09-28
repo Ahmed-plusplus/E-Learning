@@ -26,7 +26,9 @@ abstract class AppStrings {
   static const description = 'Description';
   static const enrolled = 'ENROLLED';
   static const enrolledSuccessfully = 'Enrolled successfully!';
+  static const enrolledFailed = 'Enrolled failed!';
   static const completeCourse = 'complete course';
+  static const noCoursesEnrolled = 'No courses enrolled yet';
   static const subscribedCourses = 'Subscribed courses';
   static const courseVideos = 'Course Videos';
   static const videoTitle = 'video title';

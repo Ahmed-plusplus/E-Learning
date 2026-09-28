@@ -66,7 +66,12 @@ class _BaseViewState extends State<BaseView> {
                     BottomNavigationBarItem(icon: Assets.icons.profileIcon.svg(), label: AppStrings.profile),
                   ],
                   currentIndex: value,
-                  onTap: (index) => bottomNavBarIndex.value = index,
+                  onTap: (index) {
+                    if(index == 1){
+                      _cubit.fetchMyCourses();
+                    }
+                    bottomNavBarIndex.value = index;
+                  },
                 ),
               ),
             ),

@@ -1,4 +1,3 @@
-import 'package:elearning/features/base/data/model/course_model.dart';
 import 'package:elearning/features/base/data/repository/base_repository.dart';
 import 'package:elearning/features/base/presentation/view_models/cubit/base_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +11,6 @@ class BaseCubit extends Cubit<BaseStates> {
   Future<void> init() async{
     await loadUserName();
     await fetchAllCourses();
-    await fetchMyCourses();
   }
 
   Future<void> loadUserName() async{
