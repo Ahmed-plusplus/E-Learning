@@ -29,7 +29,11 @@ class SignupCubit extends Cubit<SignupStates> {
       );
       response.fold(
         (failure) => emit(state.copyWith(SignupStatus.failedSignup, errorMessage: failure.errorMessage)),
-          (user) => emit(state.copyWith(SignupStatus.successSignup, ))
+          (user) async {
+            await _repository.saveUserName(user.name ?? '');
+            print(user.name);
+            emit(state.copyWith(SignupStatus.successSignup, ));
+          }
       );
   }
 }

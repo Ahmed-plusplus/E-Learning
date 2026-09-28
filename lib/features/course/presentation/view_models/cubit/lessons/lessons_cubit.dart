@@ -14,18 +14,26 @@ class LessonsCubit extends Cubit<LessonsStates> {
       List thumbnailList = await Future.wait(
           List.generate(
             state.lessons.length,
-                (index) async =>
-            (state.lessons[index].videoUrl == null)
-                ? null
-                : await VideoThumbnail.thumbnailFile(
-                  video: state.lessons[index].videoUrl!,
-                  imageFormat: ImageFormat.WEBP,
-                  timeMs: 1000
-                ),
+                (index) async {
+                  if(state.lessons[index].videoUrl == null)
+                    return null;
+                  else {
+                    try {
+                      return await VideoThumbnail.thumbnailFile(
+                          video: state.lessons[index].videoUrl!,
+                          imageFormat: ImageFormat.WEBP,
+                          timeMs: 1000
+                      );
+                    } catch(e){
+                      return null;
+                    }
+                  }
+                }
           )
       );
       emit(state.copyWith(LessonsStatus.successGetThumbnail, thumbnails: thumbnailList));
     } catch (e){
+      print(e.toString());
       emit(state.copyWith(LessonsStatus.failedGetThumbnail, errorMessage: e.toString()));
     }
   }
